@@ -5,6 +5,7 @@ interface ITodoItem {
   title: string;
   createDate: string;
   isCompleted: boolean;
+  endDate: string;
 }
 interface TodoState {
   todoList: ITodoItem[];
@@ -27,9 +28,12 @@ const todoSlice = createSlice({
       });
       if (index !== -1) {
         state.todoList[index].isCompleted = true;
+        const endTaskTime = Date.now();
+        state.todoList[index].endDate = endTaskTime.toString();
       }
     },
   },
 });
+
 export const { addTodo, completedTodo } = todoSlice.actions;
 export default todoSlice.reducer;
